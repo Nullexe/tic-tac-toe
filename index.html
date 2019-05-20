@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+	  <title>Tic-Tac-Toe</title>
+	  <link rel="stylesheet" type="text/css" href="./style.css">
+  </head>
+  <body>
+    <div class="board">
+      <div class="boardCol">
+        <div class="boardCell" id="cell-0-0"></div>
+        <div class="boardCell" id="cell-1-0"></div>
+        <div class="boardCell" id="cell-2-0"></div>
+      </div>
+      <div class="boardCol">
+        <div class="boardCell" id="cell-0-1"></div>
+        <div class="boardCell" id="cell-1-1"></div>
+        <div class="boardCell" id="cell-2-1"></div>
+      </div>
+      <div class="boardCol">
+        <div class="boardCell" id="cell-0-2"></div>
+        <div class="boardCell" id="cell-1-2"></div>
+        <div class="boardCell" id="cell-2-2"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    	
+    	let scoreSheet = [
+    	    ['', '', ''], // 0
+    	    ['', '', ''], // 1
+    	    ['', '', '']  // 2
+    	];
+
+    	let winCon = []
+
+	    let turnNumber = 0;
+
+    	function placeXorY(event) {
+    		var letter = "Y"
+    		if (turnNumber % 2 === 0) {
+    			letter = "X";
+    		}
+
+    		var clickedElement = event.target;
+    		var elementId = clickedElement.id;
+    		var rowIndex = Number(elementId.charAt(5));
+    		var columnIndex = Number(elementId.charAt(7));
+
+    		scoreSheet[rowIndex][columnIndex] = letter;
+
+			  var img = document.createElement("img");
+			  img.src = letter + ".jpg";
+
+			  clickedElement.appendChild(img);
+			  clickedElement.removeEventListener("click", placeXorY);
+
+				turnNumber += 1;
+
+				// Horizontal Win Condition
+				
+				for (rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
+					for (columnIndex = 0; columnIndex < scoreSheet.length; columnIndex++) {
+						winCon.unshift(scoreSheet[rowIndex][columnIndex])
+					}
+
+					if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
+					
+						alert("Player " + letter + " is the winner!");
+						winCon = [];
+						removeEvents();
+
+					} else {
+
+						winCon = [];
+					}
+				}
+
+				// Vertical Win Condition
+
+				for (columnIndex = 0; columnIndex < scoreSheet.length; columnIndex++) {
+					for (rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
+					winCon.unshift(scoreSheet[rowIndex][columnIndex]);
+					}
+
+					if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
+				
+						alert("Player " + letter + " is the winner!");
+						winCon = [];
+						removeEvents();
+
+					} else {
+
+						winCon = [];
+					}
+				}
+
+				// Diagonal Win Condition: Right to Left
+
+				for (index = 0; index < scoreSheet.length; index++) {
+					winCon.unshift(scoreSheet[index][index])
+    		}
+    		if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
+    		
+    			alert("Player " + letter + " is the winner!");
+    			winCon = [];
+    			removeEvents();
+
+    		} else {
+
+    			winCon = [];
+    		}
+
+    	// Diagonal Win Condition: Left to Right
+
+				winCon.unshift(scoreSheet[0][2]);
+				winCon.unshift(scoreSheet[1][1]);
+				winCon.unshift(scoreSheet[2][0]);	
+
+    		if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
+    		
+    			alert("Player " + letter + " is the winner!");
+    			winCon = [];
+    			removeEvents();
+
+    		} else {
+
+    			winCon = [];
+    		}
+    	}
+
+    	function removeEvents() {
+    		for (var rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
+	        var rowContents = scoreSheet[rowIndex];
+	        for (var columnIndex = 0; columnIndex < rowContents.length; columnIndex++) {
+	            var elementId = "cell-" + rowIndex + "-" + columnIndex;
+	            document.getElementById(elementId).removeEventListener("click", placeXorY);
+	        }
+	    }
+    	}
+    	
+
+	    // loop over the array that represents the score sheet
+	    // each element in that array is an array itself
+	    // so each inner array also needs to be looped over
+	    for (var rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
+	        var rowContents = scoreSheet[rowIndex];
+	        for (var columnIndex = 0; columnIndex < rowContents.length; columnIndex++) {
+	            var elementId = "cell-" + rowIndex + "-" + columnIndex;
+	            document.getElementById(elementId).addEventListener("click", placeXorY);
+	        }
+	    }
+
+    </script>
+  </body>
+</html>

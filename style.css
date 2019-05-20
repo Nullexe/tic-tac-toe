@@ -1,0 +1,26 @@
+.board {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: space-around;
+
+	height: 93vmin;
+	width: 93vmin;
+	background-color: #1E1E1E;
+}
+.boardCell {
+	height: 30vmin;
+	width: 30vmin;
+	background-color: lightgray;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	align-self: center;
+}
+img {
+	height: 90%;
+	width: 90%;
+	margin: 0.6em;
+}

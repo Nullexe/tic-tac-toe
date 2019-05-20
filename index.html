@@ -48,58 +48,58 @@
 
     		scoreSheet[rowIndex][columnIndex] = letter;
 
-			  var img = document.createElement("img");
-			  img.src = letter + ".jpg";
+			var img = document.createElement("img");
+			img.src = letter + ".jpg";
 
-			  clickedElement.appendChild(img);
-			  clickedElement.removeEventListener("click", placeXorY);
+			clickedElement.appendChild(img);
+			clickedElement.removeEventListener("click", placeXorY);
 
-				turnNumber += 1;
+			turnNumber += 1;
 
-				// Horizontal Win Condition
+			// Horizontal Win Condition
 				
-				for (rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
-					for (columnIndex = 0; columnIndex < scoreSheet.length; columnIndex++) {
-						winCon.unshift(scoreSheet[rowIndex][columnIndex])
-					}
-
-					if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
-					
-						alert("Player " + letter + " is the winner!");
-						winCon = [];
-						removeEvents();
-
-					} else {
-
-						winCon = [];
-					}
-				}
-
-				// Vertical Win Condition
-
+			for (rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
 				for (columnIndex = 0; columnIndex < scoreSheet.length; columnIndex++) {
-					for (rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
-					winCon.unshift(scoreSheet[rowIndex][columnIndex]);
-					}
-
-					if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
-				
-						alert("Player " + letter + " is the winner!");
-						winCon = [];
-						removeEvents();
-
-					} else {
-
-						winCon = [];
-					}
+						winCon.unshift(scoreSheet[rowIndex][columnIndex])
 				}
 
-				// Diagonal Win Condition: Right to Left
+				if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2]) {
+					
+					alert("Player " + letter + " is the winner!");
+					winCon = [];
+					removeEvents();
 
-				for (index = 0; index < scoreSheet.length; index++) {
-					winCon.unshift(scoreSheet[index][index])
+				} else {
+
+					winCon = [];
+				}
+			}
+
+			// Vertical Win Condition
+
+			for (columnIndex = 0; columnIndex < scoreSheet.length; columnIndex++) {
+				for (rowIndex = 0; rowIndex < scoreSheet.length; rowIndex++) {
+				winCon.unshift(scoreSheet[rowIndex][columnIndex]);
+				}
+
+				if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2]) {
+				
+					alert("Player " + letter + " is the winner!");
+					winCon = [];
+					removeEvents();
+
+				} else {
+
+					winCon = [];
+				}
+			}
+
+			// Diagonal Win Condition: Right to Left
+
+			for (index = 0; index < scoreSheet.length; index++) {
+				winCon.unshift(scoreSheet[index][index])
     		}
-    		if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
+    		if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2]) {
     		
     			alert("Player " + letter + " is the winner!");
     			winCon = [];
@@ -112,11 +112,11 @@
 
     	// Diagonal Win Condition: Left to Right
 
-				winCon.unshift(scoreSheet[0][2]);
-				winCon.unshift(scoreSheet[1][1]);
-				winCon.unshift(scoreSheet[2][0]);	
+			winCon.unshift(scoreSheet[0][2]);
+			winCon.unshift(scoreSheet[1][1]);
+			winCon.unshift(scoreSheet[2][0]);	
 
-    		if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2] && winCon[2] === winCon[0]) {
+    		if (winCon[0] === letter && winCon[0] === winCon[1] && winCon[1] === winCon[2]) {
     		
     			alert("Player " + letter + " is the winner!");
     			winCon = [];
